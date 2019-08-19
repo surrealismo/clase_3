@@ -1,0 +1,67 @@
+var sel, data, opcion;
+
+function preload() {
+    data = loadJSON("https://api.myjson.com/bins/c68f7");
+}
+
+function setup() {
+    createCanvas(600, 300);
+    background(200);
+    background(255, 204, 100);
+    fill(0);
+    noStroke();
+    textAlign(CENTER);
+    sel = createSelect();
+    sel.position(10, 260);
+    sel.option('Continuidad');
+    sel.option('Retención');
+    sel.option('Duración');
+    sel.changed(mySelectEvent);
+    text("Continuidad de Estudios", width / 2, 50);
+    for (var x = 0; x < 5; x++) {
+        ellipse(100 * (x + 1), height / 2, data[x].Continuidad * 10);
+    
+        text(data[x].Universidad, 100 * (x + 1), (height / 2) + 50)
+
+        fill(0);
+    }
+}
+
+function mySelectEvent() {
+    clear();
+    background(200);
+   background(255, 204, 100);
+    opcion = sel.value();
+
+    if (opcion == "Continuidad") {
+
+        text("Continuidad de Estudios", width / 2, 50);
+        for (var x = 0; x < 5; x++) {
+            ellipse(100 * (x + 1), height / 2, data[x].Continuidad * 10);
+            text(data[x].Universidad, 100 * (x + 1), (height / 2) + 50)
+            fill(0);
+        }
+
+    } else if (opcion == "Retención") {
+       background(255, 204, 100);
+        text("Retención de primer año", width / 2, 50);
+        for (var x = 0; x < 5; x++) {
+            ellipse(100 * (x + 1), height / 2, data[x].Retencion / 4);
+            text(data[x].Universidad, 100 * (x + 1), (height / 2) + 50)
+            fill(0);
+        }
+
+    } else if (opcion == "Duración") {
+         
+        text("Duración en semestres", width / 2, 50);
+        for (var x = 0; x < 5; x++) {
+            ellipse( 100 * (x + 1), height / 2, data[x].Duracion * 3.5);
+            text(data[x].Universidad, 100 * (x + 1), (height / 2) + 50)
+            fill(0);
+        }
+
+    } else {
+       
+    }
+
+}
